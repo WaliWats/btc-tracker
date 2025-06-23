@@ -1,0 +1,38 @@
+services:
+  app:
+    build:
+      context: ./app
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://dev:devpass@db:5432/btc
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: devpass
+      POSTGRES_DB: btc
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d
+
+  ws:
+    build:
+      context: ./ws
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://dev:devpass@db:5432/btc
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+
+
+volumes:
+  pgdata:
+

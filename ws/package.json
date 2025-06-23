@@ -1,0 +1,16 @@
+{
+  "name": "ws",
+  "type": "module",
+  "scripts": {
+    "start": "npx tsx scripts/binance-server.ts"
+  },
+ "dependencies": {
+  "@prisma/client": "^6.10.1",
+  "ws": "^8.16.0",
+  "tsx": "^4.7.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "prisma": "^6.10.1"
+  }
+}
